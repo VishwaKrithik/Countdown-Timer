@@ -72,7 +72,7 @@ function App() {
       </div>
       <div className='main-card'>
         <div className='display-content'>
-          <Display time={timeLeft} setTime={setTimeLeft} isActive={isActive} />
+          <Display time={timeLeft} setTime={setTimeLeft} isActive={isActive} endTime={endTimeRef} />
         </div>
         <div className='button-content'>
           {

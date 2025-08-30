@@ -1,7 +1,7 @@
 import React from 'react'
 import Input from './Input';
 
-const Display = ({time, setTime, isActive}) => {
+const Display = ({time, setTime, isActive, endTime}) => {
 
   const hours = Math.floor(time / 3600);
   const minutes = Math.floor(time / 60) % 60;
@@ -25,11 +25,11 @@ const Display = ({time, setTime, isActive}) => {
 
   return (
     <div className='timer-display'>
-      <Input value={hours} onChange={(e) => timeChangeHandler("hours", e.target.value)} disabled={isActive} />
+      <Input value={hours} onChange={(e) => {timeChangeHandler("hours", e.target.value); endTime.current=null;}} disabled={isActive} />
       <span>Hrs</span>
-      <Input value={minutes} onChange={(e) => timeChangeHandler("minutes", e.target.value)} disabled={isActive} />
+      <Input value={minutes} onChange={(e) => {timeChangeHandler("minutes", e.target.value); endTime.current=null;}} disabled={isActive} />
       <span>Mins</span>
-      <Input value={seconds} onChange={(e) => timeChangeHandler("seconds", e.target.value)} disabled={isActive} />
+      <Input value={seconds} onChange={(e) => {timeChangeHandler("seconds", e.target.value); endTime.current=null;}} disabled={isActive} />
       <span>Secs</span>
     </div>
   )
