@@ -1,6 +1,6 @@
 import { useEffect, useState } from 'react'
 import './App.css'
-import Display from './components/display';
+import Display from './components/display.jsx';
 import Button from './components/Button';
 import Header from './components/Header';
 import ToggleTheme from './components/ToggleTheme';
