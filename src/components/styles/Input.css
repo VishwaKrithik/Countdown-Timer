@@ -1,0 +1,58 @@
+.input {
+  background-color: var(--bg-input);
+  color: var(--text-input);
+  font-size: clamp(18px, 4vw, 32px);
+  border: none;
+  border-radius: 10px;
+  flex: 1;
+  max-width: clamp(60px, 15vw, 100px);
+  min-width: 50px;
+  text-align: center;
+  padding: clamp(8px, 2vw, 12px);
+  font-weight: 600;
+  transition: all 0.2s ease;
+  outline: none;
+  box-shadow: inset 0 2px 4px rgba(0, 0, 0, 0.1);
+}
+
+.input:focus {
+  box-shadow: inset 0 2px 4px rgba(0, 0, 0, 0.1), 0 0 0 2px var(--bg-button-start);
+}
+
+.input:disabled {
+  background-color: var(--bg-input-disabled);
+  border: none;
+  cursor: not-allowed;
+  opacity: 0.7;
+}
+
+.input:disabled:focus {
+  box-shadow: inset 0 2px 4px rgba(0, 0, 0, 0.1);
+}
+
+/* Responsive adjustments */
+@media (max-width: 768px) {
+  .input {
+    max-width: clamp(50px, 12vw, 80px);
+    min-width: 40px;
+    padding: clamp(6px, 1.5vw, 10px);
+  }
+}
+
+@media (max-width: 480px) {
+  .input {
+    max-width: clamp(45px, 10vw, 70px);
+    min-width: 35px;
+    padding: 6px 8px;
+    font-size: clamp(16px, 3.5vw, 24px);
+  }
+}
+
+@media (max-width: 360px) {
+  .input {
+    max-width: clamp(40px, 8vw, 60px);
+    min-width: 30px;
+    padding: 4px 6px;
+    font-size: clamp(14px, 3vw, 20px);
+  }
+}
