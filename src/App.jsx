@@ -1,4 +1,4 @@
-import { useEffect, useState } from 'react'
+import { useEffect, useRef, useState } from 'react'
 import './App.css'
 import Display from './components/Display';
 import Button from './components/Button';
@@ -9,16 +9,41 @@ function App() {
 
   const [timeLeft, setTimeLeft] = useState(90);
   const [isActive, setIsActive] = useState(false);
+  const endTimeRef = useRef(null);
+
+  // Checking with current time to update because of inconsistent updates of setInterval when in alternate tabs. 
 
   useEffect(() => {
     let timer;
-    if (isActive && timeLeft > 0) {
+    if (isActive) {
+      if(!endTimeRef.current) {
+        endTimeRef.current = Date.now() + timeLeft * 1000;
+      }
+
       timer = setInterval(() => {
-        setTimeLeft((prev) => prev - 1);
-      }, 1000)
+        const remaining = Math.max(0, Math.floor((endTimeRef.current - Date.now()) / 1000));
+        setTimeLeft(remaining);
+
+        if(remaining === 0) {
+          clearInterval(timer);
+          endTimeRef.current = null;
+        }
+      }, 500);
     }
+
     return () => clearInterval(timer);
-  }, [isActive, timeLeft]);
+  }, [isActive]);
+
+
+  // useEffect(() => {
+  //   let timer;
+  //   if (isActive && timeLeft > 0) {
+  //     timer = setInterval(() => {
+  //       setTimeLeft((prev) => prev - 1);
+  //     }, 1000)
+  //   }
+  //   return () => clearInterval(timer);
+  // }, [isActive, timeLeft]);
 
   useEffect(() => {
     if (timeLeft === 0 && isActive) {
@@ -32,6 +57,7 @@ function App() {
   const resetTimer = () => {
     setIsActive(false);
     setTimeLeft(90);
+    endTimeRef.current = null;
   }
 
   return (
